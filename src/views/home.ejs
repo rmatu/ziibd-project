@@ -37,25 +37,30 @@
           <% result.rows.forEach(function(user, index){ %>
           <tr>
             <td><%= index + 1 %></td>
-            <td><%= user[0] %></td>
-            <td><%= user[1] %></td>
-            <td><%= user[2] %></td>
-            <td><%= user[3] %></td>
-            <td><%= user[4] %></td>
-            <td><%= user[5].toString().slice(0, 15) %></td>
-            <td><%= user[6] %></td>
-            <td><%= user[7] %></td>
-            <td><%= user[8] !== null ? user[8] : 'Null' %></td>
-            <td><%= user[9] !== null ? user[9] : 'Null' %></td>
-            <td><%= user[10] %></td>
-            <td><%= user[11] %></td>
+            <td><%= user.EMPLOYEE_ID %></td>
+            <td><%= user.FIRST_NAME %></td>
+            <td><%= user.LAST_NAME %></td>
+            <td><%= user.EMAIL %></td>
+            <td><%= user.PHONE_NUMBER %></td>
+            <td><%= user.HIRE_DATE.toString().slice(0, 15) %></td>
+            <td><%= user.JOB_ID %></td>
+            <td><%= user.SALARY %></td>
             <td>
-              <a href="edit/<%= user[0] %>" class="btn btn-sm btn-primary"
+              <%= user.COMMISSION_PCT !== null ? user.COMMISSION_PCT : 'Null' %>
+            </td>
+            <td><%= user.MANAGER_ID !== null ? user.MANAGER_ID : 'Null' %></td>
+            <td><%= user.DEPARTMENT_ID %></td>
+            <td>
+              <a
+                href="edit/<%= user.EMPLOYEE_ID %>"
+                class="btn btn-sm btn-primary"
                 >Edit</a
               >
             </td>
             <td>
-              <a href="delete/<%= user[0] %>" class="btn btn-sm btn-danger"
+              <a
+                href="delete/<%= user.EMPLOYEE_ID %>"
+                class="btn btn-sm btn-danger"
                 >Delete</a
               >
             </td>

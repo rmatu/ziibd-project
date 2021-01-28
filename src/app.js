@@ -5,6 +5,7 @@ const path = require("path");
 const asyncHandler = require("express-async-handler");
 const morgan = require("morgan");
 const { selectAllEmployees, getEmployee, editEmployee } = require("./sql");
+const bodyParser = require("body-parser");
 
 // settings
 app.set("port", process.env.PORT || 3000);
@@ -13,7 +14,11 @@ app.set("views", path.join(__dirname, "views"));
 
 // middlewares
 app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(bodyParser.json());
+
+// routes
 app.get("/", (req, res) => {
   data = selectAllEmployees(req, res);
   res.render("home", {
@@ -33,8 +38,8 @@ app.get("/edit/:employeeID", (req, res) => {
 app.post(
   "/edit/:employeeID",
   asyncHandler(async (req, res) => {
+    console.log(req.body);
     try {
-      console.log(req.params);
       await editEmployee(req, res);
     } catch (e) {
       console.log(e);

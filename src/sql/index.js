@@ -1,4 +1,6 @@
 const oracledb = require("oracledb");
+oracledb.autoCommit = true;
+oracledb.outFormat = oracledb.OBJECT;
 
 module.exports = {
   selectAllEmployees: async function selectAllEmployees(req, res) {
@@ -84,23 +86,20 @@ module.exports = {
       //
       console.log("connected to database");
       // run query to get all employees
+      var sql = `UPDATE employees SET first_name='${req.body.firstName}', last_name='${req.body.lastName}' WHERE employee_id = 100`;
+      console.log({ sql });
       result = await connection.execute(
-        `UPDATE employees
-         SET employee_id='${req.body.employeeID}',
-         first_name='${req.body.firstName}',
-         last_name='${req.body.lastName},
-         email='${req.body.email},
-         phone_number='${req.body.phoneNumber},
-         hire_date=${req.body.hireDate},
-         job_id='${req.body.jobID}',
-         salary=${req.body.salary},
-         commission_pct=${req.body.commissionPCT},
-         manager_id=${req.body.managerID}
-         department_id=${req.body.departmentID}
-         where employee_id =${req.params.employeeID}
-         
-         COMMIT`
+        `UPDATE employees SET first_name='${req.body.firstName}', last_name='${req.body.lastName}' WHERE employee_id = 100`
       );
+      //  email='${req.body.email},
+      //    phone_number='${req.body.phoneNumber},
+      //    hire_date=${req.body.hireDate},
+      //    job_id='${req.body.jobID}',
+      //    salary=${req.body.salary},
+      //    commission_pct=${req.body.commissionPCT},
+      //    manager_id=${req.body.managerID}
+      //    department_id=${req.body.departmentID}
+      //    where employee_id =${req.params.employeeID}
       console.log(result);
     } catch (err) {
       //send error message
