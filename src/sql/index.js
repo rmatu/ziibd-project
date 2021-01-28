@@ -134,14 +134,15 @@ module.exports = {
       //
       console.log("connected to database");
       // run query to get all employees
-      var sql1 = `DELETE FROM employees WHERE employee_id = ${req.params.employeeID}`;
+      var sql1 = `alter table departments disable constraint DEPT_MGR_FK`;
       console.log({ sql1 });
       result = await connection.execute(sql1);
-      var sql2 = `DELETE FROM employees WHERE employee_id = ${req.params.employeeID}`;
+      var sql2 = `alter table employees disable constraint EMP_MANAGER_FK`;
       console.log({ sql2 });
-      result = await connection.execute(sql2);
-
-      console.log(result);
+      result2 = await connection.execute(sql2);
+      var sql3 = `DELETE FROM employees WHERE employee_id = ${req.params.employeeID}`;
+      result3 = await connection.execute(sql3);
+      console.log(result3);
     } catch (err) {
       //send error message
       return res.send(err.message);
