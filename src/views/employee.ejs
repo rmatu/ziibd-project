@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <a href="/" class="btn btn-sm btn-primary">Go Back</a>
+      <div class="row">
+        <div class="col-md-5 offset-md-3 card">
+          <div class="card-body">
+            <form action="/edit/<%= result.rows[0][0] %>" method="POST">
+              <div class="form-group">
+                <h4>ID</h4>
+                <input
+                  type="number"
+                  name="ID"
+                  value="<%= result.rows[0][0]%>"
+                  placeholder="ID"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>First Name</h4>
+                <input
+                  type="text"
+                  name="name"
+                  value="<%= result.rows[0][1]%>"
+                  placeholder="firstName"
+                  class="form-control"
+                  autofocus
+                />
+              </div>
+              <div class="form-group">
+                <h4>Last Name</h4>
+                <input
+                  type="text"
+                  name="lastName"
+                  value="<%= result.rows[0][2]%>"
+                  placeholder="Last Name"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Email</h4>
+                <input
+                  type="text"
+                  name="email"
+                  value="<%= result.rows[0][3]%>"
+                  placeholder="Email"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Phone Number</h4>
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  value="<%= result.rows[0][4]%>"
+                  placeholder="Phone Number"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Hire Date</h4>
+                <input
+                  type="date"
+                  name="hireDate"
+                  value="<%= result.rows[0][5]%>"
+                  placeholder="Hire Date"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Job ID</h4>
+                <input
+                  type="text"
+                  name="jobID"
+                  value="<%= result.rows[0][6]%>"
+                  placeholder="Job ID"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Salary</h4>
+                <input
+                  type="number"
+                  name="salary"
+                  value="<%= result.rows[0][7]%>"
+                  placeholder="Salary"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Comission PCT</h4>
+                <input
+                  type="number"
+                  name="comissionPCT"
+                  value="<%= result.rows[0][8]%>"
+                  placeholder="Commission PCT"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Manager ID</h4>
+                <input
+                  type="number"
+                  name="managerID"
+                  value="<%= result.rows[0][9]%>"
+                  placeholder="Manager ID"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <h4>Department ID</h4>
+                <input
+                  type="number"
+                  name="departmentID"
+                  value="<%= result.rows[0][10]%>"
+                  placeholder="Department ID"
+                  class="form-control"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                Update Employee
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
