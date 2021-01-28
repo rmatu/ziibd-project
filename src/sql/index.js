@@ -86,20 +86,99 @@ module.exports = {
       //
       console.log("connected to database");
       // run query to get all employees
-      var sql = `UPDATE employees SET first_name='${req.body.firstName}', last_name='${req.body.lastName}' WHERE employee_id = 100`;
+      var sql = `UPDATE employees SET first_name='${
+        req.body.firstName
+      }', last_name='${req.body.lastName}', email='${
+        req.body.email
+      }', phone_number='${req.body.phoneNumber}', job_id='${
+        req.body.jobID
+      }', manager_id=${req.body.managerID}, salary=${
+        req.body.salary
+      }, commission_pct=${+req.body.commissionPCT}, department_id=${
+        req.body.departmentID
+      } WHERE employee_id=${req.params.employeeID}`;
       console.log({ sql });
-      result = await connection.execute(
-        `UPDATE employees SET first_name='${req.body.firstName}', last_name='${req.body.lastName}' WHERE employee_id = 100`
-      );
-      //  email='${req.body.email},
-      //    phone_number='${req.body.phoneNumber},
-      //    hire_date=${req.body.hireDate},
-      //    job_id='${req.body.jobID}',
-      //    salary=${req.body.salary},
-      //    commission_pct=${req.body.commissionPCT},
-      //    manager_id=${req.body.managerID}
-      //    department_id=${req.body.departmentID}
-      //    where employee_id =${req.params.employeeID}
+      result = await connection.execute(sql);
+
+      console.log(result);
+    } catch (err) {
+      //send error message
+      return res.send(err.message);
+    } finally {
+      if (connection) {
+        try {
+          // Always close connections
+          await connection.close();
+          console.log("close connection success");
+        } catch (err) {
+          console.error(err.message);
+        }
+      }
+      if (result.rows.length == 0) {
+        //query return zero employees
+        return res.send("query send no rows");
+      } else {
+        //send all employees
+        return res.send(result.rows);
+      }
+    }
+  },
+  deleteEmployee: async function addEmployee(req, res) {
+    try {
+      connection = await oracledb.getConnection({
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        connectString: process.env.CONNECT_STRING,
+      });
+
+      //
+      console.log("connected to database");
+      // run query to get all employees
+      var sql1 = `DELETE FROM employees WHERE employee_id = ${req.params.employeeID}`;
+      console.log({ sql1 });
+      result = await connection.execute(sql1);
+      var sql2 = `DELETE FROM employees WHERE employee_id = ${req.params.employeeID}`;
+      console.log({ sql2 });
+      result = await connection.execute(sql2);
+
+      console.log(result);
+    } catch (err) {
+      //send error message
+      return res.send(err.message);
+    } finally {
+      if (connection) {
+        try {
+          // Always close connections
+          await connection.close();
+          console.log("close connection success");
+        } catch (err) {
+          console.error(err.message);
+        }
+      }
+      if (result.rows.length == 0) {
+        //query return zero employees
+        return res.send("query send no rows");
+      } else {
+        //send all employees
+        return res.send(result.rows);
+      }
+    }
+  },
+  addEmployee: async function addEmployee(req, res) {
+    try {
+      connection = await oracledb.getConnection({
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        connectString: process.env.CONNECT_STRING,
+      });
+
+      //
+      console.log("connected to database");
+      // run query to get all employees
+      var sql = `INSERT INTO employees (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID) VALUES(${req.body.employeeID}, '${req.body.firstName}', '${req.body.lastName}', '${req.body.email}', '${req.body.phoneNumber}', '94/06/07', '${req.body.jobID}', ${req.body.salary}, ${req.body.commissionPCT}, ${req.body.managerID}, ${req.body.departmentID})`;
+      console.log({ sql });
+      result = await connection.execute(sql);
+
       console.log(result);
     } catch (err) {
       //send error message

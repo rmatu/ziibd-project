@@ -4,7 +4,13 @@ const app = express();
 const path = require("path");
 const asyncHandler = require("express-async-handler");
 const morgan = require("morgan");
-const { selectAllEmployees, getEmployee, editEmployee } = require("./sql");
+const {
+  selectAllEmployees,
+  getEmployee,
+  editEmployee,
+  addEmployee,
+  deleteEmployee,
+} = require("./sql");
 const bodyParser = require("body-parser");
 
 // settings
@@ -46,6 +52,25 @@ app.post(
     }
   })
 );
+
+app.get("/add-employee", (req, res) => {
+  res.render("add-employee");
+});
+
+app.post(
+  "/add-employee",
+  asyncHandler(async (req, res) => {
+    try {
+      await addEmployee(req, res);
+    } catch (e) {
+      console.log(e);
+    }
+  })
+);
+
+app.get("/delete/:employeeID", (req, res) => {
+  deleteEmployee(req, res);
+});
 
 // routes
 app.listen(app.get("port"), () => {
