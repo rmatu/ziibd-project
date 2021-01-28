@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const asyncHandler = require("express-async-handler");
 const morgan = require("morgan");
-const { selectAllEmployees, getEmployee } = require("./sql");
+const { selectAllEmployees, getEmployee, editEmployee } = require("./sql");
 
 // settings
 app.set("port", process.env.PORT || 3000);
@@ -29,6 +29,18 @@ app.get("/edit/:employeeID", (req, res) => {
     data,
   });
 });
+
+app.post(
+  "/edit/:employeeID",
+  asyncHandler(async (req, res) => {
+    try {
+      console.log(req.params);
+      await editEmployee(req, res);
+    } catch (e) {
+      console.log(e);
+    }
+  })
+);
 
 // routes
 app.listen(app.get("port"), () => {
