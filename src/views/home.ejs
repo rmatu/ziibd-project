@@ -35,32 +35,35 @@
           </tr>
         </thead>
         <tbody>
-          <% result.rows.forEach(function(user, index){ %>
+          <% result.rows.forEach(function(employee, index){ %>
           <tr>
             <td><%= index + 1 %></td>
-            <td><%= user.EMPLOYEE_ID %></td>
-            <td><%= user.FIRST_NAME %></td>
-            <td><%= user.LAST_NAME %></td>
-            <td><%= user.EMAIL %></td>
-            <td><%= user.PHONE_NUMBER %></td>
-            <td><%= user.HIRE_DATE.toString().slice(0, 15) %></td>
-            <td><%= user.JOB_ID %></td>
-            <td><%= user.SALARY %></td>
+            <td><%= employee.EMPLOYEE_ID %></td>
+            <td><%= employee.FIRST_NAME %></td>
+            <td><%= employee.LAST_NAME %></td>
+            <td><%= employee.EMAIL %></td>
+            <td><%= employee.PHONE_NUMBER %></td>
+            <td><%= employee.HIRE_DATE.toString().slice(0, 15) %></td>
+            <td><%= employee.JOB_ID %></td>
+            <td><%= employee.SALARY %></td>
             <td>
-              <%= user.COMMISSION_PCT !== null ? user.COMMISSION_PCT : 'Null' %>
+              <%= employee.COMMISSION_PCT !== null ? employee.COMMISSION_PCT :
+              'Null' %>
             </td>
-            <td><%= user.MANAGER_ID !== null ? user.MANAGER_ID : 'Null' %></td>
-            <td><%= user.DEPARTMENT_ID %></td>
+            <td>
+              <%= employee.MANAGER_ID !== null ? employee.MANAGER_ID : 'Null' %>
+            </td>
+            <td><%= employee.DEPARTMENT_ID %></td>
             <td>
               <a
-                href="edit/<%= user.EMPLOYEE_ID %>"
+                href="edit/<%= employee.EMPLOYEE_ID %>"
                 class="btn btn-sm btn-primary"
                 >Edit</a
               >
             </td>
             <td>
               <a
-                href="delete/<%= user.EMPLOYEE_ID %>"
+                href="delete/<%= employee.EMPLOYEE_ID %>"
                 class="btn btn-sm btn-danger"
                 >Delete</a
               >

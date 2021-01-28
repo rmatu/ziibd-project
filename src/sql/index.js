@@ -92,7 +92,9 @@ module.exports = {
         req.body.email
       }', phone_number='${req.body.phoneNumber}', job_id='${
         req.body.jobID
-      }', manager_id=${req.body.managerID}, salary=${
+      }', hire_date=TO_DATE('${
+        req.body.hireDate
+      }', 'YYYY-MM-DD'),  manager_id=${req.body.managerID}, salary=${
         req.body.salary
       }, commission_pct=${+req.body.commissionPCT}, department_id=${
         req.body.departmentID
@@ -131,7 +133,6 @@ module.exports = {
         connectString: process.env.CONNECT_STRING,
       });
 
-      //
       console.log("connected to database");
       // run query to get all employees
       var sql1 = `alter table departments disable constraint DEPT_MGR_FK`;
@@ -176,7 +177,7 @@ module.exports = {
       //
       console.log("connected to database");
       // run query to get all employees
-      var sql = `INSERT INTO employees (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID) VALUES(${req.body.employeeID}, '${req.body.firstName}', '${req.body.lastName}', '${req.body.email}', '${req.body.phoneNumber}', '94/06/07', '${req.body.jobID}', ${req.body.salary}, ${req.body.commissionPCT}, ${req.body.managerID}, ${req.body.departmentID})`;
+      var sql = `INSERT INTO employees (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID) VALUES(${req.body.employeeID}, '${req.body.firstName}', '${req.body.lastName}', '${req.body.email}', '${req.body.phoneNumber}', TO_DATE('${req.body.hireDate}', 'YYYY-MM-DD'), '${req.body.jobID}', ${req.body.salary}, ${req.body.commissionPCT}, ${req.body.managerID}, ${req.body.departmentID})`;
       console.log({ sql });
       result = await connection.execute(sql);
 
